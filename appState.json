@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "hansaka/hansakarecog.js",
-        "code": "exports.handler = function(event, context, callback) {\n    console.log(JSON.stringify(event,null,2));\n    \n    callback(null,event);\n}",
+        "code": "let AWS = require(\"aws-sdk\");\nlet rekog = new AWS.Rekognition();\n\nexports.handler = function(event, context, callback) {\n    //console.log(JSON.stringify(event, null, 2));\n\n    let s3 = event.Records[0].s3;\n    rekog.detectLabels({\n        Image: {\n            S3Object: {\n                Bucket: s3.bucket.name,\n                Name: s3.object.key\n            }\n        },\n        MaxLabels: 1\n    }).promise()\n    .then(data => {\n        console.log(data);\n        callback(null, {});\n    })\n    .catch(err => callback(err));\n}\n\n\n",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -47,12 +47,22 @@
             "functionId": "f9e4e2e8-5c42-40b0-836d-d941e0646be8",
             "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
           }
+        },
+        "customSecurityPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Resource": "arn:aws:rekognition:us-east-1::",
+              "Action": [
+                "*"
+              ]
+            }
+          ]
         }
       }
     },
-    "deletedFiles": [
-      "hansaka/lambda.js"
-    ],
+    "deletedFiles": [],
     "rootNode": "ab3d583f-f8be-4f87-85f6-ca862b08995e",
     "openFiles": [
       "f9e4e2e8-5c42-40b0-836d-d941e0646be8"
@@ -86,7 +96,13 @@
       }
     ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "version": "2.566.0",
+          "language": "javascript"
+        }
+      }
     }
   },
   "PROJECT_META": {
@@ -96,7 +112,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1573109494374
+    "lastSave": 1573111349460
   },
   "VCS_STATE": {
     "provider": "GitHub",
