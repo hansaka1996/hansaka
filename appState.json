@@ -1,0 +1,108 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "ab3d583f-f8be-4f87-85f6-ca862b08995e": {
+        "id": "ab3d583f-f8be-4f87-85f6-ca862b08995e",
+        "parent": null,
+        "name": "hansaka",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "f9e4e2e8-5c42-40b0-836d-d941e0646be8"
+        ],
+        "isRemovable": false,
+        "filePath": "hansaka"
+      },
+      "f9e4e2e8-5c42-40b0-836d-d941e0646be8": {
+        "id": "f9e4e2e8-5c42-40b0-836d-d941e0646be8",
+        "parent": "ab3d583f-f8be-4f87-85f6-ca862b08995e",
+        "name": "hansakarecog.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "hansaka/hansakarecog.js",
+        "code": "exports.handler = function(event, context, callback) {\n    console.log(JSON.stringify(event,null,2));\n    \n    callback(null,event);\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "s3habucket22",
+            "config": {
+              "type": "s3:ObjectCreated:*",
+              "keyPrefix": "",
+              "keySuffix": ""
+            }
+          }
+        ],
+        "testCases": {
+          "6c47bcb9-7d84-4084-aa87-2457b45ae7a9": {
+            "id": "6c47bcb9-7d84-4084-aa87-2457b45ae7a9",
+            "name": "Unnamed event",
+            "functionId": "f9e4e2e8-5c42-40b0-836d-d941e0646be8",
+            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+          }
+        }
+      }
+    },
+    "deletedFiles": [
+      "hansaka/lambda.js"
+    ],
+    "rootNode": "ab3d583f-f8be-4f87-85f6-ca862b08995e",
+    "openFiles": [
+      "f9e4e2e8-5c42-40b0-836d-d941e0646be8"
+    ],
+    "currentFileId": "f9e4e2e8-5c42-40b0-836d-d941e0646be8",
+    "resources": {
+      "s3habucket22": {
+        "name": "s3habucket22",
+        "type": "S3",
+        "config": {
+          "mode": 1,
+          "bucket": {
+            "region": "us-east-1",
+            "name": "habucket22"
+          }
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "hansaka",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1573109494374
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "hansaka",
+      "url": "https://github.com/hansaka1996/hansaka"
+    }
+  }
+}
